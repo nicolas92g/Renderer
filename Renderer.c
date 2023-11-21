@@ -6,7 +6,6 @@
 #include <string.h>
 
 #define BUFFERS_SIZES 150
-#define _CRT_SECURE_NO_WARNINGS
 
 void RendererCreate(Renderer* self, Window* window, Camera* camera)
 {
@@ -29,6 +28,13 @@ void RendererCreate(Renderer* self, Window* window, Camera* camera)
 
 	//create main shader
 	ShaderCreate(&self->mainShader, bufVert, bufFrag);
+
+	//transparency
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	//enable cull facing
+	glEnable(GL_CULL_FACE);
 }
 
 void RendererDestroy(Renderer* self)
@@ -72,12 +78,16 @@ int RendererRemove(Renderer* self, Object3d* object)
 
 void RendererRender(Renderer* self)
 {
+	glEnable(GL_DEPTH_TEST);
+
 	CameraUpdate(self->cameraPtr, &self->mainShader);
 
 	for (unsigned i = 0; i < self->numberOfObjects; i++)
 	{
 		Object3dDraw(self->objectsPtrs[i], &self->mainShader);
 	}
+
+	glDisable(GL_DEPTH_TEST);
 }
 
 void RendererStartMainLoop(Renderer* self, void(*initCallback)(Renderer*), void(*frameCallback)(Renderer*), void(*endCallback)(void))
@@ -86,11 +96,12 @@ void RendererStartMainLoop(Renderer* self, void(*initCallback)(Renderer*), void(
 	do {
 		WindowStartFrame(self->windowPtr);
 
-		//compute frame
-		frameCallback(self);
-
 		//display frame
 		RendererRender(self);
+
+		//compute next frame
+		frameCallback(self);
+
 		WindowEndFrame(self->windowPtr);
 	} while (!WindowShouldClose(self->windowPtr) && !WindowGetKey(self->windowPtr, GLFW_KEY_ESCAPE));
 	endCallback();

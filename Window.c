@@ -38,16 +38,6 @@ void WindowCreate(Window* self, unsigned width, unsigned height, const char* tit
 
     //set input mode
     glfwSetInputMode(self->ptr, GLFW_STICKY_MOUSE_BUTTONS, GLFW_FALSE);
-
-    //enable transparent
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    //enable cull facing
-    glEnable(GL_CULL_FACE);
-
-    //enable depth testing
-    glEnable(GL_DEPTH_TEST);
 }
 
 void WindowDestroy(Window* self)

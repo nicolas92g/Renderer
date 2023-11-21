@@ -4,9 +4,11 @@
 #include "Object3d.h"
 #include "Camera.h"
 #include "Material.h"
+#include "Renderer2d.h"
 
 #include <math.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <assert.h>
 
 #define RENDERER_MAX_OBJECT3D_NUMBER 1000
