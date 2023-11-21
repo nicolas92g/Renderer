@@ -14,6 +14,7 @@ void ShaderUse(Shader* self);
 void ShaderSetMat4(Shader* self, const char* name, mat4* mat);
 void ShaderSetInt(Shader* self, const char* name, int value);
 void ShaderSetVec3(Shader* self, const char* name, vec3 value);
+void ShaderSetVec4(Shader* self, const char* name, vec4 value);
 
 
 

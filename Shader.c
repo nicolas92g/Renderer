@@ -95,6 +95,12 @@ void ShaderSetVec3(Shader* self, const char* name, vec3 value)
     glUniform3fv(glGetUniformLocation(self->id, name), 1,  &value.x);
 }
 
+void ShaderSetVec4(Shader* self, const char* name, vec4 value)
+{
+    ShaderUse(self);
+    glUniform4fv(glGetUniformLocation(self->id, name), 1, &value.x);
+}
+
 char* fileToString(const char* filename) {
 
     FILE* file;
