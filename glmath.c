@@ -18,6 +18,16 @@ mat4 orthographicProjection(float left, float right, float bottom, float top, fl
     return ret;
 }
 
+vec2 make_vec2(float x, float y)
+{
+    return (vec2) { x, y};
+}
+
+vec2 make_vec2f(float x)
+{
+    return (vec2) { x, x };
+}
+
 vec3 make_vec3(float x, float y, float z)
 {
     return (vec3) { x, y, z };

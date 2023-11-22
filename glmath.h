@@ -49,6 +49,14 @@ typedef struct matrix4x4 {
 /**
  * create a vec3.
  */
+vec2 make_vec2(float x, float y);
+/**
+ * create a vec3 with one value
+ */
+vec2 make_vec2f(float x);
+/**
+ * create a vec3.
+ */
 vec3 make_vec3(float x, float y, float z);
 /**
  * create a vec3 with one value

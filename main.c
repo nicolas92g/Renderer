@@ -9,15 +9,9 @@ Object3d floorObj;
 Mesh importedMesh;
 Object3d importedObj;
 
-//computation of a frame in the main loop
-void frame(Renderer* r) {
-    importedObj.rotationAngle += .01;
+Renderer2d r2d;
 
-    if (WindowGetKey(&window, GLFW_KEY_E)) RendererRemove(r, &importedObj);
-    if (WindowGetKey(&window, GLFW_KEY_Q)) RendererAdd(r, &importedObj);
-
-    CameraBasicControls(&camera, .003f, 10.f, 5);
-}
+size_t f = 0;
 
 //initializations before the loop
 void init(Renderer* r) {
@@ -25,7 +19,6 @@ void init(Renderer* r) {
     WindowSetBackgroundColor(.3, .7, .9, 1.);
 
     float vertices[] = {
-        //coordonnées (xyz)        //droites normales          //coordonées uv (pour les textures)
        -0.5f,  -0.5f,  0.0f,       0.0f,   0.0f, 1.0f,        0.0f,   0.0f,
         0.5f,  -0.5f,  0.0f,       0.0f,   0.0f, 1.0f,        1.0f,   0.0f,
        -0.5f,   0.5f,  0.0f,       0.0f,   0.0f, 1.0f,        0.0f,   1.0f,
@@ -40,7 +33,7 @@ void init(Renderer* r) {
     //3D Objects
     MeshCreate(&squareMesh, vertices, indices, 4, 6);
 
-    Object3dCreate(&floorObj, &squareMesh, make_vec4f(0), make_vec4(200,200, 1, 1), make_vec4(1, 0, 0, 1), PI / 2.f);
+    Object3dCreate(&floorObj, &squareMesh, make_vec4f(0), make_vec4(200, 200, 1, 1), make_vec4(1, 0, 0, 1), PI / 2.f);
     RendererAdd(r, &floorObj);
 
     MeshCreateFromObj(&importedMesh, "assets/codechatLogo.obj");
@@ -51,11 +44,49 @@ void init(Renderer* r) {
 
     MaterialCreate(&squareMesh.material);
     MaterialSetDiffuseTexture(&squareMesh.material, "assets/enzo.png");
+
+    //2d
+    Renderer2dCreate(&r2d, &window);
+    Renderer2dSetCenterPoint(&r2d, BOTTOM_LEFT);
+    r2d.textColor = make_vec4(0, 0, 0, 1);
 }
+
+//computation of a frame in the main loop
+void frame(Renderer* r) {
+
+    f++;
+
+    importedObj.rotationAngle += 1 * window.deltaTime;
+
+    importedObj.position.y = 6 + cos(glfwGetTime()) * 2;
+
+    if (WindowGetKey(&window, GLFW_KEY_E)) RendererRemove(r, &importedObj);
+    if (WindowGetKey(&window, GLFW_KEY_Q)) RendererAdd(r, &importedObj);
+
+    CameraBasicControls(&camera, .003f, 10.f, 5);
+
+    //2d
+    Object2dData button, img2;
+    Object2dDataCreate(&button, make_vec2(200, 200), make_vec2(200, 50));
+    Object2dDataCreate(&img2, make_vec2(110, 110), make_vec2(100, 100));
+
+    Renderer2dUpdate(&r2d);
+    //Renderer2dImage(&r2d, &squareMesh.material.diffuseTexture, &img1);
+    //Renderer2dColor(&r2d, make_vec4(1, 0, 0, .3), &img2);
+    if (Renderer2dColorButton(&r2d, "test button", ButtonColor(BUTTON_COLOR), &button)) {
+        printf("%llu\n", f);
+    }
+
+    
+   
+    Renderer2dText(&r2d, "ceci est du texte !", 10, 10, 20);
+}
+
 
 //free everything after the loop
 void end() {
     MeshDestroy(&squareMesh);
+    Renderer2dDestroy(&r2d);
 }
 
 //main function
@@ -64,7 +95,7 @@ int main() {
     WindowCreate(&window, 1000, 600, "renderer test");
     WindowSetIcon(&window, "assets/enzo.png");
 
-    CameraCreate(&camera, &window, make_vec4(0, 10, 4, 1), 1.1);
+    CameraCreate(&camera, &window, make_vec4(0, 10, 1, 5), 1.1);
     
     Renderer renderer;
     RendererCreate(&renderer, &window, &camera);
@@ -72,6 +103,8 @@ int main() {
 
     WindowDestroy(&window);
     RendererDestroy(&renderer);
+    
+    
     return 0;
 }
 
