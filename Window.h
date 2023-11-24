@@ -11,7 +11,6 @@ typedef struct Window{
 
 void WindowCreate(Window* self, unsigned width, unsigned height, const char* title);
 void WindowDestroy(Window* self);
-
 void WindowStartFrame(Window* self);
 void WindowEndFrame(Window* self);
 int WindowShouldClose(Window* self);
@@ -21,3 +20,4 @@ int WindowGetHeight(const Window* self);
 void WindowSetTitle(Window* self, const char* title);
 int WindowGetKey(Window* self, int GLFW_KEY);
 void WindowSetIcon(Window* self, const char* filepath);
+void WindowSetFullscreen(Window* self, int isFullscreen);

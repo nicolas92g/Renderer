@@ -102,3 +102,15 @@ void WindowSetIcon(Window* self, const char* filepath)
     icon.pixels = stbi_load(filepath, &icon.width, &icon.height, NULL, 4);
     glfwSetWindowIcon(self->ptr, 1, &icon);
 }
+
+void WindowSetFullscreen(Window* self, int isFullscreen)
+{
+    GLFWmonitor* monitor = glfwGetPrimaryMonitor(); glfwGetWindowMonitor(self->ptr);
+    const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+    
+    if (isFullscreen)
+        glfwSetWindowMonitor(self->ptr, monitor, 0, 0, mode->width, mode->height, GLFW_DONT_CARE);
+    else
+        glfwSetWindowMonitor(self->ptr, NULL, 100, 100, mode->width / 2, mode->height / 2, GLFW_DONT_CARE);
+
+}

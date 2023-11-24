@@ -51,7 +51,7 @@ int RendererAdd(Renderer* self, Object3d* object)
 
 	//check it is not already in
 	for (unsigned i = 0; i < self->numberOfObjects; i++)
-		if (object == self->objectsPtrs[i]) 
+		if (object == self->objectsPtrs[i])
 			return 0;
 
 	//add object
@@ -92,6 +92,8 @@ void RendererRender(Renderer* self)
 
 void RendererStartMainLoop(Renderer* self, void(*initCallback)(Renderer*), void(*frameCallback)(Renderer*), void(*endCallback)(void))
 {
+	int isFullscreen = 0, previousF11state = 0;
+
 	initCallback(self);
 	do {
 		WindowStartFrame(self->windowPtr);
@@ -101,6 +103,16 @@ void RendererStartMainLoop(Renderer* self, void(*initCallback)(Renderer*), void(
 
 		//compute next frame
 		frameCallback(self);
+
+		//fullscreen
+		if (WindowGetKey(self->windowPtr, GLFW_KEY_F11)) {
+			if (previousF11state == 0) {
+				isFullscreen = !isFullscreen;
+				WindowSetFullscreen(self->windowPtr, isFullscreen);
+			}
+		}
+		previousF11state = WindowGetKey(self->windowPtr, GLFW_KEY_F11);
+
 
 		WindowEndFrame(self->windowPtr);
 	} while (!WindowShouldClose(self->windowPtr) && !WindowGetKey(self->windowPtr, GLFW_KEY_ESCAPE));
