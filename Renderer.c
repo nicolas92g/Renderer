@@ -90,7 +90,7 @@ void RendererRender(Renderer* self)
 	glDisable(GL_DEPTH_TEST);
 }
 
-void RendererStartMainLoop(Renderer* self, void(*frameCallback)(Renderer*))
+void RendererStartMainLoop(Renderer* self, void(*frameCallback)(void*), void* frameObj)
 {
 	int isFullscreen = 0, previousF11state = 0;
 

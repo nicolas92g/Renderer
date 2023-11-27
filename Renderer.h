@@ -47,7 +47,7 @@ void RendererRender(Renderer* self);
 /**
  * start the rendering loop
  */
-void RendererStartMainLoop(Renderer* self, void(*frameCallback)(Renderer*));
+void RendererStartMainLoop(Renderer* self, void(*frameCallback)(void*), void* frameObj);
 
 
 
