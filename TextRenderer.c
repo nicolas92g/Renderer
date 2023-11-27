@@ -47,7 +47,7 @@ void TextRendererCreate(TextRenderer* self, Window* window, const char* fontFile
     {
         //load the character C
         if (FT_Load_Char(face, c, FT_LOAD_RENDER)) {
-            printf("le chargement du charactere : %d n'a pas reussie\n", c);
+            printf("TextRenderer : loading of character : %d failed\n", c);
             continue;
         }
 

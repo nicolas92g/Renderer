@@ -74,7 +74,7 @@ void frame(Renderer* r) {
     //Renderer2dImage(&r2d, &squareMesh.material.diffuseTexture, &img1);
     //Renderer2dColor(&r2d, make_vec4(1, 0, 0, .3), &img2);
     if (Renderer2dColorButton(&r2d, "test button", ButtonColor(BUTTON_COLOR), &button)) {
-        printf("%llu\n", f);
+        WindowSetFullscreen(&window, 1);
     }
 
     
