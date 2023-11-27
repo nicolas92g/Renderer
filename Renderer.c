@@ -114,5 +114,5 @@ void RendererStartMainLoop(Renderer* self, void(*frameCallback)(Renderer*))
 
 
 		WindowEndFrame(self->windowPtr);
-	} while (!WindowShouldClose(self->windowPtr) && !WindowGetKey(self->windowPtr, GLFW_KEY_ESCAPE));
+	} while (!WindowShouldClose(self->windowPtr));
 }
