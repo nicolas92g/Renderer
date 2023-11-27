@@ -16,7 +16,7 @@ void Renderer2dCreate(Renderer2d* self, Window* window)
 	self->textColor = make_vec4(0, 0, 0, 1);
 
 	//text
-	TextRendererCreate(&self->textRenderer, window, "./assets/Roboto-Medium.ttf");
+	TextRendererCreate(&self->textRenderer, window, RENDERER2D_FONT_PATH"Roboto-Medium.ttf");
 
 	//window
 	self->windowPtr = window;
@@ -45,15 +45,7 @@ void Renderer2dCreate(Renderer2d* self, Window* window)
 	glBindVertexArray(0);
 
 	//shader
-	char bufVert[BUFFERS_SIZES] = { 0 };
-	strcpy(bufVert, RENDERER_SHADERS_PATH);
-	strcat(bufVert, "2d.vert");
-
-	char bufFrag[BUFFERS_SIZES] = { 0 };
-	strcpy(bufFrag, RENDERER_SHADERS_PATH);
-	strcat(bufFrag, "2d.frag");
-
-	ShaderCreate(&self->shader, bufVert, bufFrag);
+	ShaderCreate(&self->shader, RENDERER_SHADERS_PATH"2d.vert", RENDERER_SHADERS_PATH"2d.frag");
 }
 
 void Renderer2dDestroy(Renderer2d* self)
@@ -155,7 +147,7 @@ void Renderer2dText(Renderer2d* self, const char* text, int x, int y, int scale)
 		TextRendererDraw(&self->textRenderer, 
 			text, 
 			WindowGetWidth(self->windowPtr) - w - x,
-			WindowGetHeight(self->windowPtr) - scale - y, 
+			WindowGetHeight(self->windowPtr) - scale - y,
 			scale, 
 			self->textColor
 		);
