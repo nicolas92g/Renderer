@@ -45,9 +45,9 @@ int RendererRemove(Renderer* self, Object3d* object);
  */
 void RendererRender(Renderer* self);
 /**
- * start the rendering loop 
+ * start the rendering loop
  */
-void RendererStartMainLoop(Renderer* self, void (*initCallback)(Renderer*), void(*frameCallback)(Renderer*), void (*endCallback)(void));
+void RendererStartMainLoop(Renderer* self, void(*frameCallback)(Renderer*));
 
 
 

@@ -90,11 +90,10 @@ void RendererRender(Renderer* self)
 	glDisable(GL_DEPTH_TEST);
 }
 
-void RendererStartMainLoop(Renderer* self, void(*initCallback)(Renderer*), void(*frameCallback)(Renderer*), void(*endCallback)(void))
+void RendererStartMainLoop(Renderer* self, void(*frameCallback)(Renderer*))
 {
 	int isFullscreen = 0, previousF11state = 0;
 
-	initCallback(self);
 	do {
 		WindowStartFrame(self->windowPtr);
 
@@ -116,5 +115,4 @@ void RendererStartMainLoop(Renderer* self, void(*initCallback)(Renderer*), void(
 
 		WindowEndFrame(self->windowPtr);
 	} while (!WindowShouldClose(self->windowPtr) && !WindowGetKey(self->windowPtr, GLFW_KEY_ESCAPE));
-	endCallback();
 }
