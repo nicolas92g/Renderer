@@ -101,7 +101,7 @@ void RendererStartMainLoop(Renderer* self, void(*frameCallback)(void*), void* fr
 		RendererRender(self);
 
 		//compute next frame
-		frameCallback(self);
+		frameCallback(frameObj);
 
 		//fullscreen
 		if (WindowGetKey(self->windowPtr, GLFW_KEY_F11)) {
