@@ -12,7 +12,7 @@ void CameraCreate(Camera* self, const Window* window, vec4 position, float fov)
     self->zFar = 200.f;
     self->hAngle = 0.f;
     self->vAngle = PI / 2.f;
-    glfwSetInputMode(self->window->ptr, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+    glfwSetInputMode(self->window->ptr, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 }
 
 void CameraUpdate(Camera* self, Shader* shader)
