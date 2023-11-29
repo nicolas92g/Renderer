@@ -101,6 +101,12 @@ void ShaderSetVec4(Shader* self, const char* name, vec4 value)
     glUniform4fv(glGetUniformLocation(self->id, name), 1, &value.x);
 }
 
+void ShaderSetFloat(Shader* self, const char* name, float value)
+{
+    ShaderUse(self);
+    glUniform1f(glGetUniformLocation(self->id, name), value);
+}
+
 char* fileToString(const char* filename) {
 
     FILE* file;
