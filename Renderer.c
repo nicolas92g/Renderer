@@ -35,6 +35,9 @@ void RendererCreate(Renderer* self, Window* window, Camera* camera)
 
 	//enable cull facing
 	glEnable(GL_CULL_FACE);
+
+	//flip textures vertically
+	stbi_set_flip_vertically_on_load(1);
 }
 
 void RendererDestroy(Renderer* self)
