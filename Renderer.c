@@ -119,3 +119,13 @@ void RendererStartMainLoop(Renderer* self, void(*frameCallback)(void*), void* fr
 		WindowEndFrame(self->windowPtr);
 	} while (!WindowShouldClose(self->windowPtr));
 }
+
+void RendererSetAmbientLight(Renderer* self, float strength)
+{
+	ShaderSetFloat(&self->mainShader, "ambientStrength", strength);
+}
+
+void RendererSetSunDirection(Renderer* self, vec3 sunDirection)
+{
+	ShaderSetVec3(&self->mainShader, "lightDir", sunDirection);
+}

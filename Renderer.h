@@ -48,6 +48,14 @@ void RendererRender(Renderer* self);
  * start the rendering loop
  */
 void RendererStartMainLoop(Renderer* self, void(*frameCallback)(void*), void* frameObj);
+/**
+ * Change Ambient Light Strength.
+ */
+void RendererSetAmbientLight(Renderer* self, float strength);
+/**
+ * Change the sun direction of the sun
+ */
+void RendererSetSunDirection(Renderer* self, vec3 sunDirection);
 
 
 

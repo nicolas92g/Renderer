@@ -9,8 +9,8 @@ out vec4 fragColor;
 uniform sampler2D diffuseTexture;
 uniform vec3 diffuseConst;
 
-const float ambientStrength = .2f;
-
+uniform float ambientStrength = .2;
+uniform vec3 lightDir = vec3(.4, .6, -.3);
 
 void main(){
 	vec4 diffuseColor;
@@ -20,7 +20,7 @@ void main(){
 		diffuseColor = vec4(diffuseConst, 1);
 
 	vec3 norm = normalize(normal);
-	const vec3 lightDir = vec3(.4, .6, -.3);
+	
 	float diff = max(dot(norm, lightDir), 0.0);
 	vec3 diffuse = diff * vec3(1);
 
