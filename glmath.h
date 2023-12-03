@@ -79,6 +79,10 @@ vec4 Vec4Multiplyf(vec4 vec, float f);
  */
 vec4 Vec4Add(vec4 v1, vec4 v2);
 /**
+ * @brief substract two vectors
+ */
+vec4 Vec4Sub(vec4 v1, vec4 v2);
+/**
  * @brief create an orthographic projection matrix (adapted to 2D)
  */
 mat4 orthographicProjection(float left, float right, float bottom, float top, float zNear, float zFar);

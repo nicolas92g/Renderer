@@ -57,6 +57,11 @@ vec4 Vec4Add(vec4 v1, vec4 v2)
     return (vec4) { v1.x + v2.x, v1.y + v2.y, v1.z + v2.z, v1.w + v2.w };
 }
 
+vec4 Vec4Sub(vec4 v1, vec4 v2)
+{
+    return (vec4) { v1.x - v2.x, v1.y - v2.y, v1.z - v2.z, v1.w - v2.w };
+}
+
 mat4 identityMatrix(float f) {
     mat4 ret;
 
