@@ -38,6 +38,10 @@ void WindowCreate(Window* self, unsigned width, unsigned height, const char* tit
 
     //set input mode
     glfwSetInputMode(self->ptr, GLFW_STICKY_MOUSE_BUTTONS, GLFW_FALSE);
+
+    //init
+    self->previousTime = 0.;
+    self->deltaTime = 0.;
 }
 
 void WindowDestroy(Window* self)
