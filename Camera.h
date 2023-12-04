@@ -3,8 +3,6 @@
 #include "Window.h"
 #include "Shader.h"
 
-static vec4 CameraUpDirection = { 0, 1, 0, 1 };
-
 typedef struct Camera
 {
 	const Window* window;
@@ -12,6 +10,7 @@ typedef struct Camera
 
 	vec4 position;
 	vec4 look;
+	vec4 upVector;
 
 	float fov;
 	float zNear;

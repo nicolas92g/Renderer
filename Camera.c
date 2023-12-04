@@ -7,6 +7,7 @@ void CameraCreate(Camera* self, const Window* window, vec4 position, float fov)
 	self->window = window;
 	self->position = position;
 	self->look = make_vec4(0, 0, 1, 1);
+    self->upVector = make_vec4(0, 1, 0, 1);
 	self->fov = fov;
     self->zNear = .1f;
     self->zFar = 200.f;
@@ -24,7 +25,7 @@ void CameraUpdate(Camera* self, Shader* shader)
         self->zFar
     );
 
-    mat4 view = viewMatrix(self->position, Vec4Add(self->position, self->look), CameraUpDirection);
+    mat4 view = viewMatrix(self->position, Vec4Add(self->position, self->look), self->upVector);
 
     mat4 idm = identityMatrix(1);
 
@@ -87,7 +88,7 @@ void CameraBasicControls(Camera* self, float sensivity, float speed, float sprin
     direction.y = 0;
     direction = normalize(direction);
 
-    vec4 right = normalize(crossProduct(self->look, CameraUpDirection));
+    vec4 right = normalize(crossProduct(self->look, self->upVector));
 
     speed *= self->window->deltaTime;
 
@@ -96,10 +97,10 @@ void CameraBasicControls(Camera* self, float sensivity, float speed, float sprin
         speed *= sprintMultiplier;
 
     if (WindowGetKey(self->window, GLFW_KEY_SPACE))
-        self->position = Vec4Add(self->position, Vec4Multiplyf(CameraUpDirection, speed));
+        self->position = Vec4Add(self->position, Vec4Multiplyf(self->upVector, speed));
 
     if (WindowGetKey(self->window, GLFW_KEY_LEFT_CONTROL))
-        self->position = Vec4Add(self->position, Vec4Multiplyf(CameraUpDirection, -speed));
+        self->position = Vec4Add(self->position, Vec4Multiplyf(self->upVector, -speed));
 
     if (WindowGetKey(self->window, GLFW_KEY_W))
         self->position = Vec4Add(self->position, Vec4Multiplyf(direction, speed));
