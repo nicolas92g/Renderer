@@ -184,3 +184,12 @@ float dotProduct(vec4 A, vec4 B)
 vec4 normalize(vec4 a) {
     return Vec4Multiplyf(a, 1.0f / sqrt((double)square(a.x) + (double)square(a.y) + (double)square(a.z)));
 }
+
+float Vec3Distance(vec3 a, vec3 b)
+{
+    return sqrt(
+        pow(b.x - a.x, 2) + 
+        pow(b.y - a.y, 2) + 
+        pow(b.z - a.z, 2)
+    );
+}

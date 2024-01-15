@@ -126,5 +126,12 @@ float dotProduct(vec4 A, vec4 B);
  * @brief modifie un vecteur pour que sa norme soit egale a 1
  */
 vec4 normalize(vec4 a);
+/**
+ * @brief get distance between two points
+ */
+float Vec3Distance(vec3 a, vec3 b);
 
 #endif //GLMATH
+
+
+

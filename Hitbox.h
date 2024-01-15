@@ -9,8 +9,12 @@ typedef struct Sphere{
 typedef struct Hitbox
 {
 	Sphere shape;
-	vec3 offset;
+	vec3 position;
 } Hitbox;
 
 void HitboxCreate(Hitbox* self, float sphereRadius, vec3 offset);
 
+void HitboxSetPosition(Hitbox* self, vec3 position);
+void HitboxSetShape(Hitbox* self, Sphere shape);
+
+int HitboxCollide(Hitbox* self, const Hitbox* other);
